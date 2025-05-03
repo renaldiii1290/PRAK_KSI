@@ -1,0 +1,41 @@
+def encrypt_text(plaintext, n):
+    ans = ""
+    for ch in plaintext:
+        if ch == " ":
+            ans += " "
+        elif ch.isupper():
+            ans += chr((ord(ch) + n - 65) % 26 + 65)
+        elif ch.islower():
+            ans += chr((ord(ch) + n - 97) % 26 + 97)
+        else:
+            ans += ch
+    return ans
+
+def decrypt_text(ciphertext, n):
+    ans = ""
+    for ch in ciphertext:
+        if ch == " ":
+            ans += " "
+        elif ch.isupper():
+            ans += chr((ord(ch) - n - 65) % 26 + 65)
+        elif ch.islower():
+            ans += chr((ord(ch) - n - 97) % 26 + 97)
+        else:
+            ans += ch
+    return ans
+
+# Program utama
+print("Caesar Cipher Program")
+choice = input("Pilih mode (encrypt/decrypt): ").strip().lower()
+text = input("Masukkan teks: ")
+shift = int(input("Masukkan jumlah shift (n): "))
+
+if choice == "encrypt":
+    result = encrypt_text(text, shift)
+    print("Hasil Enkripsi:", result)
+elif choice == "decrypt":
+    result = decrypt_text(text, shift)
+    print("Hasil Dekripsi:", result)
+else:
+    print("Pilihan tidak valid. Silakan pilih 'encrypt' atau 'decrypt'.")
+    
