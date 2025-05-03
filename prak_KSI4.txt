@@ -1,0 +1,23 @@
+def otp_encrypt(plaintext: str, key: str) -> str:
+    ciphertext = []
+
+    for i in range(len(plaintext)):
+        if plaintext[i].isalpha():
+            p = ord(plaintext[i].upper()) - ord('A')
+            k = ord(key[i].upper()) - ord('A')
+            c = (p + k) % 26
+            ciphertext.append(chr(c + ord('A')))
+        else:
+            ciphertext.append(plaintext[i])  # karakter non-huruf tidak dienkripsi
+
+    return ''.join(ciphertext)
+
+# Contoh penggunaan
+plaintext = "HELLO"
+key = "XQMWZ"  # harus sama panjang dan acak
+
+ciphertext = otp_encrypt(plaintext, key)
+
+print("Plaintext :", plaintext)
+print("Key       :", key)
+print("Ciphertext:", ciphertext)
